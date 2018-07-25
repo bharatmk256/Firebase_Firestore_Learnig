@@ -24,15 +24,27 @@ $(document).ready(function() {
             });
 
             $('#ageBetweenFilter').click(function(){
-                console.log('ageBetweenFilter Filter executed');
+                // console.log('ageBetweenFilter Filter executed');
+                employeesRef.where("age", ">=", 35).where("age", "<=", 50)
+                .onSnapshot(function(querySnapshot){
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#yearsOfExperienceFilter').click(function(){
-                console.log('yearsOfExperienceFilter Filter executed');
+                // console.log('yearsOfExperienceFilter Filter executed');
+                employeesRef.where("gender", "==", "Female")
+                employeesRef.where("yearsOfExperience", ">=", 5).where("yearsOfExperience", "<=", 10)
+                .onSnapshot(function(querySnapshot){
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#clearFilter').click(function(){
-                console.log('clearFilter Filter executed');
+                // console.log('clearFilter Filter executed');
+                employeesRef.get().then(function(querySnapshot){
+                        LoadTableData(querySnapshot);
+                });
             });
 });
 
