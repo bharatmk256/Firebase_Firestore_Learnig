@@ -1,14 +1,26 @@
 $(document).ready(function() {
             $('#onlyMalesFilter').click(function(){
-                console.log('onlyMalesFilter Filter executed');
+                // console.log('onlyMalesFilter Filter executed');
+                employeesRef.where("gender", "==", "Male")
+                .onSnapshot(function(querySnapshot){
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#fullTimeFilter').click(function(){
-                console.log('fullTimeFilter Filter executed');
+                // console.log('fullTimeFilter Filter executed');
+                employeesRef.where("isFullTime", "==", true)
+                .onSnapshot(function(querySnapshot){
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#olderThenFilter').click(function(){
-                console.log('olderThenFilter Filter executed');
+                // console.log('olderThenFilter Filter executed');
+                employeesRef.where("age", ">=", 30)
+                .onSnapshot(function(querySnapshot){
+                    LoadTableData(querySnapshot);
+                });
             });
 
             $('#ageBetweenFilter').click(function(){
