@@ -42,26 +42,34 @@ $(document).ready(function() {
 
             $('#clearFilter').click(function(){
                 // console.log('clearFilter Filter executed');
-                employeesRef.get().then(function(querySnapshot){
+                employeesRef.orderBy("fName","desc").limit(5).get().then(function(querySnapshot){
                         LoadTableData(querySnapshot);
                 });
             });
+            $("#searchEmployee" ).change(function() {
+                // console.log('You entered: ', $(this).val());
+                var searchValue = $(this).val();
+                employeesRef.where("fName", "==", searchValue)
+                .onSnapshot(function(querySnapshot){
+                    LoadTableData(querySnapshot)
+                });
+              });
 });
 
 
 db.collection("employees").onSnapshot(function(snapShot){
-console.log("Something Changed");
-snapShot.docChanges.forEach(function(change){
-if(change.type === "added"){
-    console.log("Employe Added ");
-}
-if(change.type === "modified"){
-    console.log("Employe Modefied ");
-}
-if(change.type === "removed");{
-    console.log("Employe Removed ");
-}
-});
+// console.log("Something Changed");
+// snapShot.docChanges.forEach(function(change){
+// if(change.type === "added"){
+//     console.log("Employe Added ");
+// }
+// if(change.type === "modified"){
+//     console.log("Employe Modefied ");
+// }
+// if(change.type === "removed");{
+//     console.log("Employe Removed ");
+// }
+// });
 
 
 LoadTableData(snapShot);
